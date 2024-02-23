@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .image-item {
+            
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            
+        }
+        .personalinfo{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(46, 162, 166, 0.8);
+            display: none;
+        }
+        .button {
+            padding: 8px 16px;
+            width: 300px;
+            background-color: #c1cad3;
+            color: #161414;
+            font-size:medium;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color:rgba(46, 162, 166, 0.8);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container" id="container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const images = [
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-855.jpg   "  , "name": "Olivia jane", "profession": "Web Developer" },
+                 { "image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-1029.jpg  " , "name": "Eman charlottee", "profession": "Graphic Designer"} ,
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-791-1.jpg " , "name": "Alexa Johnson", "profession": "Photographer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-846.jpg   "  , "name": "John jane", "profession": "Web Developer" },
+                 {"image": "https://tse2.mm.bing.net/th?id=OIP.fY_VZJBaJbZVT02rU9t0mwHaE8&pid=Api&P=0&h=180 " , "name": "Sophia Smith", "profession": "Graphic Designer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-855.jpg   "  , "name": "Olivia jane", "profession": "Web Developer" },
+                 { "image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-1029.jpg  " , "name": "Eman charlottee", "profession": "Graphic Designer"} ,
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-791-1.jpg " , "name": "Alexa Johnson", "profession": "Photographer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-846.jpg   "  , "name": "John jane", "profession": "Web Developer" },
+                 {"image": "https://tse2.mm.bing.net/th?id=OIP.fY_VZJBaJbZVT02rU9t0mwHaE8&pid=Api&P=0&h=180 " , "name": "Sophia Smith", "profession": "Graphic Designer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-855.jpg   "  , "name": "Olivia jane", "profession": "Web Developer" },
+                 { "image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-1029.jpg  " , "name": "Eman charlottee", "profession": "Graphic Designer"} ,
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-791-1.jpg " , "name": "Alexa Johnson", "profession": "Photographer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-846.jpg   "  , "name": "John jane", "profession": "Web Developer" },
+                 {"image": "https://tse2.mm.bing.net/th?id=OIP.fY_VZJBaJbZVT02rU9t0mwHaE8&pid=Api&P=0&h=180 " , "name": "Sophia Smith", "profession": "Graphic Designer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-855.jpg   "  , "name": "Olivia jane", "profession": "Web Developer" },
+                 { "image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-1029.jpg  " , "name": "Eman charlottee", "profession": "Graphic Designer"} ,
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-791-1.jpg " , "name": "Alexa Johnson", "profession": "Photographer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-846.jpg   "  , "name": "John jane", "profession": "Web Developer" },
+                 {"image": "https://tse2.mm.bing.net/th?id=OIP.fY_VZJBaJbZVT02rU9t0mwHaE8&pid=Api&P=0&h=180 " , "name": "Sophia Smith", "profession": "Graphic Designer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-855.jpg   "  , "name": "Olivia jane", "profession": "Web Developer" },
+                 { "image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-1029.jpg  " , "name": "Eman charlottee", "profession": "Graphic Designer"} ,
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-791-1.jpg " , "name": "Alexa Johnson", "profession": "Photographer" },
+                 {"image": "https://www.corporatephotographylondon.com/wp-content/uploads/2019/11/HKstrategies-846.jpg   "  , "name": "John jane", "profession": "Web Developer" },
+                 {"image": "https://tse2.mm.bing.net/th?id=OIP.fY_VZJBaJbZVT02rU9t0mwHaE8&pid=Api&P=0&h=180 " , "name": "Sophia Smith", "profession": "Graphic Designer" },
+
+            ];
+
+            const imageGrid = document.getElementById("container");
+
+            images.forEach(imageData => {
+                const imageUrl = imageData.image;
+                const name = imageData.name;
+                const profession = imageData.profession;
+                const imageItem = document.createElement("div");
+                imageItem.classList.add("image-item");
+
+                const imageElement = document.createElement("img");
+                imageElement.src = imageUrl;
+                imageElement.alt = "User Image";
+
+                const captionElement = document.createElement("div");
+                captionElement.classList.add("personalinfo");
+                captionElement.textContent = `${name}, ${profession}`;
+
+                const buttonElement = document.createElement("button");
+                buttonElement.classList.add("button");
+                buttonElement.innerHTML = `${name} <br> ${profession}`;
+
+                buttonElement.addEventListener("click", function() {
+                    captionElement.style.display = (captionElement.style.display === "none") ? "block" : "none";
+                });
+
+                imageItem.appendChild(imageElement);
+                imageItem.appendChild(buttonElement);
+                imageItem.appendChild(captionElement);
+                imageGrid.appendChild(imageItem);
+            });
+        });
+    </script>
+</body>
+</html>
